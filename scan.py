@@ -45,10 +45,11 @@ class Scanner(object):
 				myResolver.nameservers = i
 				record = myResolver.query(self.target)
 				self.dnsRecords.append(record[0].address)
+			self.dnsRecords = list(set(self.dnsRecords))
 		except Exception as e:
 			pass
 		finally:
-			return True if len(set(self.dnsRecords)) > 1 else False
+			return True if len(self.dnsRecords) > 1 else False
 
 	def scanPort(self, port):
 		try:
